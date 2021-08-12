@@ -49,11 +49,12 @@ const App = () => {
     const networkId = await web3.eth.net.getId();
     console.log(networkId);
     const networkData= HasanTokenAbi.networks[networkId];
+    console.log(networkData.address);
     if ( networkData  ) { //networkId === 3
       //0x4311bad41f98ee9920dec4395c4e13e442afdea0 // address of token
       const hasantokencontract = new web3.eth.Contract(
         HasanTokenAbi.abi,
-        "0x363bF141B94eF7788A8b8e7eAFebD32464994b27"            //networkData.address //"0xb3bc4f03e84420f05e17d1165720cd1592e53cbe"
+        networkData.address //"0xb3bc4f03e84420f05e17d1165720cd1592e53cbe"
       );
       console.log(hasantokencontract);
       //name
@@ -85,13 +86,13 @@ const App = () => {
         "ether"
       );
       console.log(balanceofuserinwei);
-      // const networkId = await web3.eth.net.getId();
-      // const networkData1=  TokensaleAbi.networks[networkId];
+      const networkId = await web3.eth.net.getId();
+      const networkData1=  TokensaleAbi.networks[networkId];
       //crowd sale contract address
       //0x0a588dff04a280ef9e55aea9d7ce41c0484acf58
       const presalecontract = new web3.eth.Contract(
         TokensaleAbi.abi,
-       "0x36e3FFe989aA4bd7BAB8b728Fd89cfD5dc222a1b" //  networkData1.address
+         networkData1.address
       );
       setpresalecontractinstance(presalecontract);
       const devtokeninpresale = await presalecontract.methods
